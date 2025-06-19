@@ -1,5 +1,5 @@
 // Portfolio Images Data
-const portfolioImages = [
+const cartoonyImages = [
     {
         src: "images.png/Leader board.png",
         caption: "Leader Board UI Design"
@@ -15,10 +15,6 @@ const portfolioImages = [
     {
         src: "images.png/lucky wheel.png",
         caption: "Lucky Wheel Interface"
-    },
-    {
-        src: "images.png/daily rewards sci fi.png",
-        caption: "Sci-Fi Daily Rewards"
     },
     {
         src: "images.png/Inventory.png",
@@ -74,8 +70,37 @@ const portfolioImages = [
     }
 ];
 
+const scifiImages = [
+    {
+        src: "images.png/daily rewards sci fi.png",
+        caption: "Sci-Fi Daily Rewards"
+    },
+    {
+        src: "images.png/Scifi theme inventory.png",
+        caption: "Sci-Fi Inventory"
+    },
+    {
+        src: "images.png/scifi theme items.png",
+        caption: "Sci-Fi Items"
+    }
+];
+
+let currentCategory = 'cartoony';
+let portfolioImages = cartoonyImages;
 let currentSlideIndex = 0;
 let previousSlideIndex = 0;
+
+function switchCategory(category) {
+    if (category === currentCategory) return;
+    currentCategory = category;
+    portfolioImages = (category === 'scifi') ? scifiImages : cartoonyImages;
+    currentSlideIndex = 0;
+    previousSlideIndex = 0;
+    updatePortfolioSlide();
+    // Update button active state
+    document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelector('.category-btn.' + category).classList.add('active');
+}
 
 // Smooth scrolling function
 function scrollToSection(sectionId) {
