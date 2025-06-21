@@ -1,102 +1,48 @@
 // Portfolio Images Data
-const cartoonyImages = [
-    {
-        src: "images.png/Leader board.png",
-        caption: "Leader Board UI Design"
-    },
-    {
-        src: "images.png/portfolio1.png",
-        caption: "Egg Store Interface"
-    },
-    {
-        src: "images.png/ammunation store.png",
-        caption: "Ammunation Store UI"
-    },
-    {
-        src: "images.png/lucky wheel.png",
-        caption: "Lucky Wheel Interface"
-    },
-    {
-        src: "images.png/Inventory.png",
-        caption: "Inventory System UI"
-    },
-    {
-        src: "images.png/quest board.png",
-        caption: "Quest Board Interface"
-    },
-    {
-        src: "images.png/pet theme inventory.png",
-        caption: "Pet Theme Inventory"
-    },
-    {
-        src: "images.png/pet theme trade portal.png",
-        caption: "Pet Theme Trade Portal"
-    },
-    {
-        src: "images.png/pet theme quest log.png",
-        caption: "Pet Theme Quest Log"
-    },
-    {
-        src: "images.png/pet theme settings.png",
-        caption: "Pet Theme Settings"
-    },
-    {
-        src: "images.png/pet theme lucky wheel.png",
-        caption: "Pet Theme Lucky Wheel"
-    },
-    {
-        src: "images.png/pet theme skill tree.png",
-        caption: "Pet Theme Skill Tree"
-    },
-    {
-        src: "images.png/pet theme store.png",
-        caption: "Pet Theme Store"
-    },
-    {
-        src: "images.png/pet theme daily rewards.png",
-        caption: "Pet Theme Daily Rewards"
-    },
-    {
-        src: "images.png/pet theme gamepass.png",
-        caption: "Pet Theme Gamepass"
-    },
-    {
-        src: "images.png/pet theme icons in 2d.png",
-        caption: "Pet Theme 2D Icons Collection"
-    },
-    {
-        src: "images.png/pet theme icons in 3d.png",
-        caption: "Pet Theme 3D Icons Collection"
-    }
+const petThemeImages = [
+    { src: "images.png/pet theme inventory.png", caption: "Pet Theme Inventory" },
+    { src: "images.png/pet theme trade portal.png", caption: "Pet Theme Trade Portal" },
+    { src: "images.png/pet theme quest log.png", caption: "Pet Theme Quest Log" },
+    { src: "images.png/pet theme settings.png", caption: "Pet Theme Settings" },
+    { src: "images.png/pet theme lucky wheel.png", caption: "Pet Theme Lucky Wheel" },
+    { src: "images.png/pet theme skill tree.png", caption: "Pet Theme Skill Tree" },
+    { src: "images.png/pet theme store.png", caption: "Pet Theme Store" },
+    { src: "images.png/pet theme daily rewards.png", caption: "Pet Theme Daily Rewards" },
+    { src: "images.png/pet theme gamepass.png", caption: "Pet Theme Gamepass" },
+    { src: "images.png/pet theme icons in 2d.png", caption: "Pet Theme 2D Icons Collection" },
+    { src: "images.png/pet theme icons in 3d.png", caption: "Pet Theme 3D Icons Collection" }
 ];
 
 const scifiImages = [
-    {
-        src: "images.png/daily rewards sci fi.png",
-        caption: "Sci-Fi Daily Rewards"
-    },
-    {
-        src: "images.png/Scifi theme inventory.png",
-        caption: "Sci-Fi Inventory"
-    },
-    {
-        src: "images.png/scifi theme items.png",
-        caption: "Sci-Fi Items"
-    }
+    { src: "images.png/daily rewards sci fi.png", caption: "Sci-Fi Daily Rewards" },
+    { src: "images.png/Scifi theme inventory.png", caption: "Sci-Fi Inventory" },
+    { src: "images.png/scifi theme items.png", caption: "Sci-Fi Items" },
+    { src: "images.png/scifi battlepass.png", caption: "Sci-Fi Battlepass" }
 ];
 
-let currentCategory = 'cartoony';
-let portfolioImages = cartoonyImages;
+const cartoonImages = [
+    { src: "images.png/Leader board.png", caption: "Leader Board UI Design" },
+    { src: "images.png/portfolio1.png", caption: "Egg Store Interface" },
+    { src: "images.png/ammunation store.png", caption: "Ammunation Store UI" },
+    { src: "images.png/lucky wheel.png", caption: "Lucky Wheel Interface" },
+    { src: "images.png/Inventory.png", caption: "Inventory System UI" },
+    { src: "images.png/quest board.png", caption: "Quest Board Interface" }
+];
+
+let currentCategory = 'cartoon';
+let portfolioImages = cartoonImages;
 let currentSlideIndex = 0;
 let previousSlideIndex = 0;
 
 function switchCategory(category) {
     if (category === currentCategory) return;
     currentCategory = category;
-    portfolioImages = (category === 'scifi') ? scifiImages : cartoonyImages;
+    if (category === 'pet') portfolioImages = petThemeImages;
+    else if (category === 'scifi') portfolioImages = scifiImages;
+    else portfolioImages = cartoonImages;
     currentSlideIndex = 0;
     previousSlideIndex = 0;
-    updatePortfolioSlide();
+    updatePortfolioSlides();
     // Update button active state
     document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
     document.querySelector('.category-btn.' + category).classList.add('active');
@@ -113,79 +59,47 @@ function scrollToSection(sectionId) {
     }
 }
 
-// Portfolio carousel functions
 function changeSlide(direction) {
     previousSlideIndex = currentSlideIndex;
     currentSlideIndex += direction;
-    
-    // Loop around
     if (currentSlideIndex >= portfolioImages.length) {
         currentSlideIndex = 0;
     } else if (currentSlideIndex < 0) {
         currentSlideIndex = portfolioImages.length - 1;
     }
-    
-    updatePortfolioSlide();
+    updatePortfolioSlides(direction);
 }
 
-function updatePortfolioSlide() {
+function updatePortfolioSlides(direction = 0) {
     const sliderWrapper = document.querySelector('.portfolio-slider-wrapper');
-    const imageContainer = document.querySelector('.portfolio-image');
-    const caption = document.querySelector('.portfolio-caption');
-    
-    if (sliderWrapper && imageContainer && caption) {
-        // Determine slide direction based on previous and current index
-        let slideDirection = 1; // Default to right slide
-        
-        if (currentSlideIndex < previousSlideIndex) {
-            slideDirection = -1; // Left slide
-        }
-        
-        // Handle wrap-around cases
-        if (currentSlideIndex === 0 && previousSlideIndex === portfolioImages.length - 1) {
-            slideDirection = 1; // Going from last to first
-        } else if (currentSlideIndex === portfolioImages.length - 1 && previousSlideIndex === 0) {
-            slideDirection = -1; // Going from first to last
-        }
-        
-        // Smooth fade out with scale and blur
-        sliderWrapper.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
-        sliderWrapper.style.transform = `translateX(${-slideDirection * 50}px) scale(0.95)`;
-        sliderWrapper.style.opacity = '0.7';
-        sliderWrapper.style.filter = 'blur(1px)';
-        
-        setTimeout(() => {
-            // Update content smoothly
-            imageContainer.style.transition = 'opacity 0.3s ease';
-            imageContainer.style.opacity = '0';
-            
-            setTimeout(() => {
-                // Update content
-                imageContainer.src = portfolioImages[currentSlideIndex].src;
-                imageContainer.alt = portfolioImages[currentSlideIndex].caption;
-                caption.textContent = portfolioImages[currentSlideIndex].caption;
-                
-                // Fade in new content
-                imageContainer.style.opacity = '1';
-                
-                // Reset position and animate back in
-                sliderWrapper.style.transition = 'none';
-                sliderWrapper.style.transform = `translateX(${slideDirection * 50}px) scale(0.95)`;
-                sliderWrapper.style.opacity = '0.7';
-                sliderWrapper.style.filter = 'blur(1px)';
-                
-                // Force a reflow
-                sliderWrapper.offsetHeight;
-                
-                setTimeout(() => {
-                    sliderWrapper.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
-                    sliderWrapper.style.transform = 'translateX(0) scale(1)';
-                    sliderWrapper.style.opacity = '1';
-                    sliderWrapper.style.filter = 'blur(0px)';
-                }, 10);
-            }, 150);
-        }, 300);
-    }
+    if (!sliderWrapper) return;
+    sliderWrapper.innerHTML = '';
+    const total = portfolioImages.length;
+    const prevIdx = (currentSlideIndex - 1 + total) % total;
+    const nextIdx = (currentSlideIndex + 1) % total;
+    const slides = [
+        { ...portfolioImages[prevIdx], class: 'prev' },
+        { ...portfolioImages[currentSlideIndex], class: 'current' },
+        { ...portfolioImages[nextIdx], class: 'next' }
+    ];
+    slides.forEach(slide => {
+        const slideDiv = document.createElement('div');
+        slideDiv.className = 'portfolio-slide ' + slide.class;
+        slideDiv.innerHTML = `
+            <div class="portfolio-image-container">
+                <img src="${slide.src}" alt="${slide.caption}" class="portfolio-image">
+                <div class="portfolio-caption">${slide.caption}</div>
+            </div>
+        `;
+        sliderWrapper.appendChild(slideDiv);
+    });
+    // Animation
+    sliderWrapper.classList.remove('slide-left', 'slide-right');
+    if (direction === 1) sliderWrapper.classList.add('slide-left');
+    else if (direction === -1) sliderWrapper.classList.add('slide-right');
+    setTimeout(() => {
+        sliderWrapper.classList.remove('slide-left', 'slide-right');
+    }, 600);
 }
 
 // Auto-advance portfolio slides
@@ -689,6 +603,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     `;
     document.head.appendChild(revealStyle);
+    
+    updatePortfolioSlides();
 });
 
 // Add console welcome message
