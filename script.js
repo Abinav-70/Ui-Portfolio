@@ -17,7 +17,7 @@ const scifiImages = [
     { src: "images.png/daily rewards sci fi.png", caption: "Sci-Fi Daily Rewards" },
     { src: "images.png/Scifi theme inventory.png", caption: "Sci-Fi Inventory" },
     { src: "images.png/scifi theme items.png", caption: "Sci-Fi Items" },
-    { src: "images.png/scifi battlepass.png", caption: "Sci-Fi Battlepass" }
+    { src: "images.png/sci fi battlepass.png", caption: "Sci-Fi Battlepass" }
 ];
 
 const cartoonImages = [
