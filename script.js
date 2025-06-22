@@ -29,8 +29,12 @@ const cartoonImages = [
     { src: "images.png/quest board.png", caption: "Quest Board Interface" }
 ];
 
-let currentCategory = 'cartoon';
-let portfolioImages = cartoonImages;
+const simpleImages = [
+    { src: "images.png/simple inventory.png", caption: "Simple Inventory" }
+];
+
+let currentCategory = 'simple';
+let portfolioImages = simpleImages;
 let currentSlideIndex = 0;
 let previousSlideIndex = 0;
 
@@ -39,7 +43,8 @@ function switchCategory(category) {
     currentCategory = category;
     if (category === 'pet') portfolioImages = petThemeImages;
     else if (category === 'scifi') portfolioImages = scifiImages;
-    else portfolioImages = cartoonImages;
+    else if (category === 'cartoon') portfolioImages = cartoonImages;
+    else if (category === 'simple') portfolioImages = simpleImages;
     currentSlideIndex = 0;
     previousSlideIndex = 0;
     updatePortfolioSlides();
