@@ -30,7 +30,7 @@ const cartoonImages = [
 ];
 
 const simpleImages = [
-    { src: "images.png/simple inventory.png", caption: "Simple Inventory" }
+    { src: "images.png/Simple Inventory.png", caption: "Simple Inventory" }
 ];
 
 let currentCategory = 'simple';
