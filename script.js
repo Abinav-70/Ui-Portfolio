@@ -38,7 +38,7 @@ const cartoonImages = [
 
 const simpleImages = [
     { src: "images.png/Simple Inventory.png", caption: "Simple Inventory" },
-    { src: "images.png/Metallic quest.png", caption: "Metallic Quest" }
+    { src: "images.png/Metallic Quest.png", caption: "Metallic Quest" }
 ];
 
 let currentCategory = 'horror';
