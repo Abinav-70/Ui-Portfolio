@@ -1,4 +1,11 @@
 // Portfolio Images Data
+const horrorImages = [
+    // Add all images containing 'Horror' in their name
+    
+    { src: "images.png/Horror Theme UI.png", caption: "The Horror Theme UI" }
+    // Add more as needed
+];
+
 const petThemeImages = [
     { src: "images.png/pet theme inventory.png", caption: "Pet Theme Inventory" },
     { src: "images.png/pet theme trade portal.png", caption: "Pet Theme Trade Portal" },
@@ -30,22 +37,24 @@ const cartoonImages = [
 ];
 
 const simpleImages = [
-    { src: "images.png/Simple Inventory.png", caption: "Simple Inventory" }
+    { src: "images.png/Simple Inventory.png", caption: "Simple Inventory" },
+    { src: "images.png/Metallic quest.png", caption: "Metallic Quest" }
 ];
 
-let currentCategory = 'simple';
-let portfolioImages = simpleImages;
-let currentSlideIndex = 0;
+let currentCategory = 'horror';
+let portfolioImages = horrorImages;
+let currentSlideIndex = Math.floor(Math.random() * portfolioImages.length);
 let previousSlideIndex = 0;
 
 function switchCategory(category) {
     if (category === currentCategory) return;
     currentCategory = category;
-    if (category === 'pet') portfolioImages = petThemeImages;
+    if (category === 'horror') portfolioImages = horrorImages;
+    else if (category === 'pet') portfolioImages = petThemeImages;
     else if (category === 'scifi') portfolioImages = scifiImages;
     else if (category === 'cartoon') portfolioImages = cartoonImages;
     else if (category === 'simple') portfolioImages = simpleImages;
-    currentSlideIndex = 0;
+    currentSlideIndex = Math.floor(Math.random() * portfolioImages.length);
     previousSlideIndex = 0;
     updatePortfolioSlides();
     // Update button active state
