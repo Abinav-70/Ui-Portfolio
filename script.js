@@ -1,8 +1,7 @@
 // Portfolio Images Data
 const horrorImages = [
-    // Add all images containing 'Horror' in their name
-    
-    { src: "images.png/Horror Theme UI.png", caption: "The Horror Theme UI" }
+    { src: "images.png/Horror Theme UI.png", caption: "The Horror Theme UI" },
+    { src:"images.png/Horror Settings.png", caption: "The Horror Settings UI"},
     // Add more as needed
 ];
 
@@ -28,6 +27,7 @@ const scifiImages = [
 ];
 
 const cartoonImages = [
+    { src: "images.png/cartoon ui.png", caption: "Cartoon Theme UI" },
     { src: "images.png/Leader board.png", caption: "Leader Board UI Design" },
     { src: "images.png/portfolio1.png", caption: "Egg Store Interface" },
     { src: "images.png/ammunation store.png", caption: "Ammunation Store UI" },
@@ -511,6 +511,33 @@ function setupTextAnimations() {
     });
 }
 
+// Testimonials Data
+const testimonials = [
+    { src: "images.png/Testimonials/Testimonial - 1.png", alt: "Testimonial - 1" },
+    { src: "images.png/Testimonials/Testimonial - 2.png", alt: "Testimonial - 2" }
+];
+
+function updateTestimonials() {
+    const row1 = document.querySelector('.testimonials-row-1');
+    const row2 = document.querySelector('.testimonials-row-2');
+    row1.innerHTML = '';
+    row2.innerHTML = '';
+    if (testimonials[0]) {
+        const img1 = document.createElement('img');
+        img1.src = testimonials[0].src;
+        img1.alt = testimonials[0].alt;
+        img1.className = 'testimonial-img';
+        row1.appendChild(img1);
+    }
+    if (testimonials[1]) {
+        const img2 = document.createElement('img');
+        img2.src = testimonials[1].src;
+        img2.alt = testimonials[1].alt;
+        img2.className = 'testimonial-img row-2';
+        row2.appendChild(img2);
+    }
+}
+
 // Initialize all functions when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Portfolio website loaded successfully!');
@@ -619,6 +646,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.head.appendChild(revealStyle);
     
     updatePortfolioSlides();
+    updateTestimonials();
 });
 
 // Add console welcome message
@@ -628,4 +656,4 @@ console.log(`
 💚 Built with HTML, CSS & JavaScript
 📱 Fully responsive design
 ✨ Smooth animations & interactions
-`); 
+`);
