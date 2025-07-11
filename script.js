@@ -538,6 +538,48 @@ function updateTestimonials() {
     }
 }
 
+// --- Mobile Portfolio Rendering ---
+const portfolioCategories = [
+    { key: 'horror', name: 'Horror', images: horrorImages },
+    { key: 'simple', name: 'Simple', images: simpleImages },
+    { key: 'cartoon', name: 'Cartoon', images: cartoonImages },
+    { key: 'scifi', name: 'Sci-Fi', images: scifiImages },
+    { key: 'pet', name: 'Pet Theme', images: petThemeImages },
+];
+
+function renderMobilePortfolio() {
+    const mobileContainer = document.querySelector('.portfolio-mobile');
+    if (!mobileContainer) return;
+    mobileContainer.innerHTML = '';
+    portfolioCategories.forEach(category => {
+        if (!category.images || !category.images.length) return;
+        const catDiv = document.createElement('div');
+        catDiv.className = 'portfolio-mobile-category';
+        const title = document.createElement('div');
+        title.className = 'portfolio-mobile-category-title';
+        title.textContent = category.name;
+        catDiv.appendChild(title);
+        const imagesGrid = document.createElement('div');
+        imagesGrid.className = 'portfolio-mobile-images';
+        category.images.forEach(img => {
+            const imgWrap = document.createElement('div');
+            imgWrap.className = 'portfolio-mobile-image-container';
+            const image = document.createElement('img');
+            image.className = 'portfolio-mobile-image';
+            image.src = img.src;
+            image.alt = img.caption;
+            const caption = document.createElement('div');
+            caption.className = 'portfolio-mobile-caption';
+            caption.textContent = img.caption;
+            imgWrap.appendChild(image);
+            imgWrap.appendChild(caption);
+            imagesGrid.appendChild(imgWrap);
+        });
+        catDiv.appendChild(imagesGrid);
+        mobileContainer.appendChild(catDiv);
+    });
+}
+
 // Initialize all functions when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Portfolio website loaded successfully!');
@@ -647,6 +689,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     updatePortfolioSlides();
     updateTestimonials();
+    renderMobilePortfolio();
 });
 
 // Add console welcome message
