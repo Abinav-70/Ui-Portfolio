@@ -1029,3 +1029,60 @@ h2, h3 {
         opacity: 0;
     }
 } 
+
+@media (max-width: 700px) {
+    .portfolio-categories,
+    .portfolio-container {
+        display: none !important;
+    }
+    .portfolio-mobile {
+        display: block !important;
+        width: 100vw;
+        max-width: 100vw;
+        padding: 0 0.5rem;
+    }
+    .portfolio-mobile-category {
+        margin-bottom: 2.5rem;
+    }
+    .portfolio-mobile-category-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--accent-primary);
+        margin-bottom: 0.7rem;
+        margin-top: 1.5rem;
+        letter-spacing: 1px;
+    }
+    .portfolio-mobile-images {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.7rem;
+    }
+    .portfolio-mobile-image-container {
+        background: var(--bg-card);
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px #3ec6ff22;
+        position: relative;
+    }
+    .portfolio-mobile-image {
+        width: 100%;
+        height: auto;
+        display: block;
+        object-fit: cover;
+        border-radius: 12px 12px 0 0;
+    }
+    .portfolio-mobile-caption {
+        background: rgba(16, 22, 36, 0.88);
+        color: var(--text-main);
+        font-size: 0.85rem;
+        padding: 0.4rem 0.7rem 0.5rem 0.7rem;
+        border-radius: 0 0 12px 12px;
+        text-align: center;
+        opacity: 0.92;
+    }
+}
+@media (min-width: 701px) {
+    .portfolio-mobile {
+        display: none !important;
+    }
+} 
